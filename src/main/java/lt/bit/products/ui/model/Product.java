@@ -1,15 +1,20 @@
 package lt.bit.products.ui.model;
-
 import java.math.BigDecimal;
 import java.util.UUID;
 
 public class Product {
-private UUID id = UUID.randomUUID();
-private String name;
-private BigDecimal price;
 
-    public Product(String name, BigDecimal price, Integer quantity) {
-        this.id = id;
+    private UUID id;
+    private String name;
+    private BigDecimal price;
+    private double quantity;
+
+    public Product() {
+        this.id = UUID.randomUUID();
+    }
+
+    public Product(String name, BigDecimal price, double quantity) {
+        this.id = UUID.randomUUID();
         this.name = name;
         this.price = price;
         this.quantity = quantity;
@@ -39,14 +44,12 @@ private BigDecimal price;
         this.price = price;
     }
 
-    public Integer getQuantity() {
+    public double getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(double quantity) {
         this.quantity = quantity;
     }
-
-    private Integer quantity;
 }
 
