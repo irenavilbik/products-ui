@@ -41,15 +41,22 @@ class ProductController {
 
     @PostMapping("/products/save")
     String saveProduct(@ModelAttribute Product product, Model model) {
-        if (!StringUtils.hasLength(product.getName())) {
-            model.addAttribute("errorMsg", "Name is required");
+        String error = hasError(product.getName());
+        if (error != null){
+            model.addAttribute("errorMsg", error);
             model.addAttribute("productItem", product);
             return "productForm";
         }
         service.saveProduct(product);
         return "redirect:/products";
     }
-
+    private String hasError(String name) {
+        if (!StringUtils.hasLength(name)){
+            return "Name id required";
+        } if (name.length() < 3) {
+            return "name is too short";
+        } return null;
+    }
     @GetMapping("/products/delete")
     String deleteProduct(@RequestParam UUID id) {
         service.deleteProduct(id);
